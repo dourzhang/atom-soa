@@ -30,7 +30,7 @@ public class HttpInvoke implements Invoke {
         //根据methodName和methodType获取实例的method对象
         //然后反射调用method方法
         JSONObject sendParamJobj = new JSONObject();
-        sendParamJobj.put("methodName", invocation.getMethod());
+        sendParamJobj.put("methodName", invocation.getMethod().getName());
         sendParamJobj.put("methodParams", invocation.getObjs());
         sendParamJobj.put("serviceId", reference.getId());
         sendParamJobj.put("paramTypes", invocation.getMethod().getParameterTypes());

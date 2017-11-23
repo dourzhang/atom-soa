@@ -32,6 +32,7 @@ public class ProtocolBeanDefinitionParse implements BeanDefinitionParser {
         String name = element.getAttribute("name");
         String host = element.getAttribute("host");
         String port = element.getAttribute("port");
+        String contextpath = element.getAttribute("contextpath");
 
         if (StringUtils.isEmpty(name)) {
             throw new DubboException("name could't be null");
@@ -46,7 +47,7 @@ public class ProtocolBeanDefinitionParse implements BeanDefinitionParser {
         beanDefinition.getPropertyValues().addPropertyValue("name", name);
         beanDefinition.getPropertyValues().addPropertyValue("host", host);
         beanDefinition.getPropertyValues().addPropertyValue("port", port);
-
+        beanDefinition.getPropertyValues().addPropertyValue("contextpath", contextpath);
         parserContext.getRegistry().registerBeanDefinition("protocol" + host + port, beanDefinition);
 
         return beanDefinition;

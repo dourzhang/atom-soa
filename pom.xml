@@ -11,6 +11,8 @@
     <modules>
         <module>atom-provider</module>
         <module>atom-soa</module>
+        <module>atom-consumer</module>
+        <module>atom-consumer</module>
     </modules>
 
     <properties>

@@ -31,8 +31,8 @@ public class RoundRobinLoadBalance implements LoadBalance {
             JSONObject protocolJobj = nodeJobj.getJSONObject("protocol");
             NodeInfo nodeInfo = new NodeInfo();
             nodeInfo.setHost(null == protocolJobj.getString("host") ? "" : protocolJobj.getString("host"));
-            nodeInfo.setHost(null == protocolJobj.getString("port") ? "" : protocolJobj.getString("port"));
-            nodeInfo.setContextPath(null == protocolJobj.getString("contextPath") ? "" : protocolJobj.getString("contextPath"));
+            nodeInfo.setPort(null == protocolJobj.getString("port") ? "" : protocolJobj.getString("port"));
+            nodeInfo.setContextPath(null == protocolJobj.getString("contextpath") ? "" : protocolJobj.getString("contextpath"));
 
             return nodeInfo;
         }

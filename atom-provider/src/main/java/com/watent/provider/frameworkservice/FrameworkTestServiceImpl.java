@@ -1,9 +1,9 @@
 package com.watent.provider.frameworkservice;
 
 
-import org.springframework.stereotype.Service;
-
-@Service
+/**
+ * @author Atom
+ */
 public class FrameworkTestServiceImpl implements FrameworkTestService {
 
     @Override

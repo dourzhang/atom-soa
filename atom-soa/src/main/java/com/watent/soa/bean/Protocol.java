@@ -20,9 +20,7 @@ public class Protocol implements Serializable, InitializingBean {
 
     private String port;
 
-    public String getName() {
-        return name;
-    }
+    private String contextpath;
 
     @Override
     public void afterPropertiesSet() throws Exception {

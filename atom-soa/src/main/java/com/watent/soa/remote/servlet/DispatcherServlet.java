@@ -34,6 +34,8 @@ public class DispatcherServlet extends HttpServlet {
             JSONArray paramTypes = requestParam.getJSONArray("paramTypes");
             JSONArray methodParamsJa = requestParam.getJSONArray("methodParams");
 
+            System.out.println("methodName:"+methodName);
+
             //反射参数
             Object[] objs = null;
             if (null != methodParamsJa) {
@@ -48,7 +50,7 @@ public class DispatcherServlet extends HttpServlet {
             ApplicationContext applicationContext = Service.getApplicationContext();
             //服务层的实例
             Object serviceBean = applicationContext.getBean(serviceId);
-
+            System.out.println("serviceBean:"+serviceBean);
             //这个方法的获取，要考虑到这个方法的重载
             Method method = getMethod(serviceBean, methodName, paramTypes);
             if (null != method) {
