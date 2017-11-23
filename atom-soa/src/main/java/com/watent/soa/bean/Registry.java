@@ -26,7 +26,7 @@ public class Registry implements Serializable {
         registryMap.put("redis", new RedisRegistry());
     }
 
-    public static Map<String, BaseRegistry> getRegistryMap() {
+    public Map<String, BaseRegistry> getRegistryMap() {
         return registryMap;
     }
 }

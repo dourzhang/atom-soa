@@ -18,7 +18,7 @@
 
     <bean id="frameworkTestServiceImpl" class="com.watent.provider.frameworkservice.FrameworkTestServiceImpl"/>
     <atom:protocol name="http" port="8090" host="127.0.0.1" contextpath="api/httpService"/>
-    <atom:service interface="com.watent.provider.frameworkservice.FrameworkTestService" ref="frameworkTestServiceImpl"/>
+    <atom:service interface="com.watent.provider.frameworkservice.FrameworkTestService" ref="frameworkTestServiceImpl" protocol="http"/>
     <atom:registry protocol="redis" address="127.0.0.1:6379"/>
 
 </beans>
