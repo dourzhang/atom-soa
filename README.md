@@ -1,5 +1,5 @@
-atom-pojo-rest
+atom-soa-parent
 ==============
-    Spring cloud rest sample
+    atom-soa-parent
     
     
