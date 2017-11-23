@@ -13,7 +13,6 @@
                         http://www.springframework.org/schema/context/spring-context-4.0.xsd
                         http://www.springframework.org/schema/aop
                         http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
-                        http://www.springframework.org/schema/tx
                         http://www.watent.com/schema/soa
 	                    http://www.watent.com/schema/soa.xsd">
 
