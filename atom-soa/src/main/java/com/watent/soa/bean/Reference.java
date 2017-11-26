@@ -2,6 +2,7 @@ package com.watent.soa.bean;
 
 import com.watent.soa.invoke.HttpInvoke;
 import com.watent.soa.invoke.Invoke;
+import com.watent.soa.invoke.NettyInvoke;
 import com.watent.soa.invoke.RmiInvoke;
 import com.watent.soa.loadbalance.LoadBalance;
 import com.watent.soa.loadbalance.RandomLoadBalance;
@@ -57,7 +58,7 @@ public class Reference implements Serializable, FactoryBean, ApplicationContextA
     static {
         invokeMap.put("http", new HttpInvoke());
         invokeMap.put("rmi", new RmiInvoke());
-        invokeMap.put("netty", null);
+        invokeMap.put("netty", new NettyInvoke());
 
         loadBalanceMap.put("random", new RandomLoadBalance());
         loadBalanceMap.put("roundrob", new RoundRobinLoadBalance());
