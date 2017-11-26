@@ -20,7 +20,7 @@ public class Invocation {
      */
     private Object[] objs;
 
-    private Invoke invoke;
-
     private Reference reference;
+
+    private Invoke invoke;
 }

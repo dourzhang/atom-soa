@@ -1,6 +1,6 @@
 package com.watent.soa.cfg;
 
-import com.watent.soa.exception.DubboException;
+import com.watent.soa.exception.SOAException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
@@ -33,13 +33,13 @@ public class ServiceBeanDefinitionParse implements BeanDefinitionParser {
         String protocol = element.getAttribute("protocol");
 
         if (StringUtils.isEmpty(intf)) {
-            throw new DubboException("service intf could't be null！");
+            throw new SOAException("service intf could't be null！");
         }
         if (StringUtils.isEmpty(ref)) {
-            throw new DubboException("service ref could't be null！");
+            throw new SOAException("service ref could't be null！");
         }
         if (StringUtils.isEmpty(protocol)) {
-            throw new DubboException("service protocol could't be null！");
+            throw new SOAException("service protocol could't be null！");
         }
 
         beanDefinition.getPropertyValues().addPropertyValue("intf", intf);

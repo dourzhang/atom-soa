@@ -1,6 +1,7 @@
 package com.watent.soa.proxy.advice;
 
 import com.watent.soa.bean.Reference;
+import com.watent.soa.cluster.Cluster;
 import com.watent.soa.invoke.Invocation;
 import com.watent.soa.invoke.Invoke;
 
@@ -34,7 +35,10 @@ public class InvokeInvocationHandler implements InvocationHandler {
         invocation.setMethod(method);
         invocation.setObjs(args);
         invocation.setReference(reference);
-        String result = invoke.invoke(invocation);
+//        String result = invoke.invoke(invocation);
+        invocation.setInvoke(invoke);
+        Cluster cluster = reference.getClusterMap().get(reference.getCluster());
+        String result = cluster.invoke(invocation);
         return result;
     }
 }

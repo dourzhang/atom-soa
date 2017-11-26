@@ -1,6 +1,6 @@
 package com.watent.soa.cfg;
 
-import com.watent.soa.exception.DubboException;
+import com.watent.soa.exception.SOAException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
@@ -34,10 +34,10 @@ public class RegistryBeanDefinitionParse implements BeanDefinitionParser {
         String address = element.getAttribute("address");
 
         if (StringUtils.isEmpty(protocol)) {
-            throw new DubboException("protocol could't be null");
+            throw new SOAException("protocol could't be null");
         }
         if (StringUtils.isEmpty(address)) {
-            throw new DubboException("address could't be null");
+            throw new SOAException("address could't be null");
         }
 
         beanDefinition.getPropertyValues().addPropertyValue("protocol", protocol);

@@ -1,5 +1,9 @@
 package com.watent.soa.bean;
 
+import com.watent.soa.cluster.Cluster;
+import com.watent.soa.cluster.FailfastClusterInvoke;
+import com.watent.soa.cluster.FailoverClusterInvoke;
+import com.watent.soa.cluster.FailsafeClusterInvoke;
 import com.watent.soa.invoke.HttpInvoke;
 import com.watent.soa.invoke.Invoke;
 import com.watent.soa.invoke.NettyInvoke;
@@ -8,6 +12,8 @@ import com.watent.soa.loadbalance.LoadBalance;
 import com.watent.soa.loadbalance.RandomLoadBalance;
 import com.watent.soa.loadbalance.RoundRobinLoadBalance;
 import com.watent.soa.proxy.advice.InvokeInvocationHandler;
+import com.watent.soa.redis.RedisApi;
+import com.watent.soa.redis.RedisServerRegistry;
 import com.watent.soa.registry.BaseRegistryDelegate;
 import lombok.Data;
 import org.springframework.beans.BeansException;
@@ -42,18 +48,23 @@ public class Reference implements Serializable, FactoryBean, ApplicationContextA
 
     private Invoke invoke;
 
+    private String retries;
+
+    private String cluster;
+
     private ApplicationContext applicationContext;
 
     public Reference() {
         System.out.println("Reference constructor");
     }
 
-    private static Map<String, Invoke> invokeMap = new HashMap<>();
-
     private static List<String> registryInfo = new ArrayList<>();
+
+    private static Map<String, Invoke> invokeMap = new HashMap<>();
 
     private static Map<String, LoadBalance> loadBalanceMap = new HashMap<>();
 
+    private static Map<String, Cluster> clusterMap = new HashMap<>();
 
     static {
         invokeMap.put("http", new HttpInvoke());
@@ -62,6 +73,10 @@ public class Reference implements Serializable, FactoryBean, ApplicationContextA
 
         loadBalanceMap.put("random", new RandomLoadBalance());
         loadBalanceMap.put("roundrob", new RoundRobinLoadBalance());
+
+        clusterMap.put("failover", new FailoverClusterInvoke());
+        clusterMap.put("failfast", new FailfastClusterInvoke());
+        clusterMap.put("failsafe", new FailsafeClusterInvoke());
     }
 
     public List<String> getRegistryInfo() {
@@ -70,6 +85,10 @@ public class Reference implements Serializable, FactoryBean, ApplicationContextA
 
     public Map<String, LoadBalance> getLoadBalanceMap() {
         return loadBalanceMap;
+    }
+
+    public Map<String, Cluster> getClusterMap() {
+        return clusterMap;
     }
 
     /**
@@ -125,6 +144,9 @@ public class Reference implements Serializable, FactoryBean, ApplicationContextA
     public void afterPropertiesSet() throws Exception {
         registryInfo = BaseRegistryDelegate.getRegistry(id, applicationContext);
         System.out.println(registryInfo);
+
+        // 完成redis 订阅 channel与publisher一致  RedisServerRegistry.onMessage()接收消息
+        RedisApi.subsribe("channel"+id,new RedisServerRegistry());
     }
 
 }

@@ -90,6 +90,11 @@ public class RedisApi {
         }
     }
 
+    /**
+     * 发布
+     * @param channel
+     * @param msg
+     */
     public static void publish(String channel, String msg) {
         Jedis jedis = null;
         try {
@@ -102,6 +107,11 @@ public class RedisApi {
         }
     }
 
+    /**
+     * 订阅
+     * @param channel
+     * @param ps
+     */
     public static void subsribe(String channel, JedisPubSub ps) {
         Jedis jedis = null;
         try {

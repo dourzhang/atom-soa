@@ -19,5 +19,5 @@
     <!--<bean id="frameworkTestServiceImpl" class="com.watent.provider.frameworkservice.FrameworkTestServiceImpl"/>-->
     <atom:protocol name="netty" port="1124" host="127.0.0.1" contextpath=""/>
     <atom:registry protocol="redis" address="127.0.0.1:6379"/>
-    <atom:reference id="frameworkTestServiceImpl" interface="com.watent.provider.frameworkservice.FrameworkTestService" loadbalance="roundrob" protocol="netty" />
+    <atom:reference id="frameworkTestServiceImpl" interface="com.watent.provider.frameworkservice.FrameworkTestService" loadbalance="roundrob" protocol="netty" retries="3" cluster="failover"/>
 </beans>

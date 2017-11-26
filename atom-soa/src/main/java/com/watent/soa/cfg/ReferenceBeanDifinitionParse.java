@@ -1,6 +1,6 @@
 package com.watent.soa.cfg;
 
-import com.watent.soa.exception.DubboException;
+import com.watent.soa.exception.SOAException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
@@ -33,29 +33,32 @@ public class ReferenceBeanDifinitionParse implements BeanDefinitionParser {
         String intf = element.getAttribute("interface");
         String protocol = element.getAttribute("protocol");
         String loadbalance = element.getAttribute("loadbalance");
+        String retries = element.getAttribute("retries");
+        String cluster = element.getAttribute("cluster");
 
         if (StringUtils.isEmpty(id)) {
-            throw new DubboException("Reference id could't be null！");
+            throw new SOAException("Reference id could't be null！");
         }
         if (StringUtils.isEmpty(intf)) {
-            throw new DubboException("Reference interface could't be null！");
+            throw new SOAException("Reference interface could't be null！");
         }
         if (StringUtils.isEmpty(protocol)) {
-            throw new DubboException("Reference protocol could't be null！");
+            throw new SOAException("Reference protocol could't be null！");
         }
         if (StringUtils.isEmpty(loadbalance)) {
-            throw new DubboException("Reference loadbalance 不能为空！");
+            throw new SOAException("Reference loadbalance 不能为空！");
         }
 
         beanDefinition.getPropertyValues().addPropertyValue("id", id);
         beanDefinition.getPropertyValues().addPropertyValue("intf", intf);
-        beanDefinition.getPropertyValues().addPropertyValue("protocol",
-                protocol);
-        beanDefinition.getPropertyValues().addPropertyValue("loadbalance",
-                loadbalance);
+        beanDefinition.getPropertyValues().addPropertyValue("protocol", protocol);
+        beanDefinition.getPropertyValues().addPropertyValue("loadbalance", loadbalance);
+        beanDefinition.getPropertyValues().addPropertyValue("retries", retries);
+        beanDefinition.getPropertyValues().addPropertyValue("cluster", cluster);
 
         parserContext.getRegistry().registerBeanDefinition("Reference" + id,
                 beanDefinition);
+
 
         return beanDefinition;
     }

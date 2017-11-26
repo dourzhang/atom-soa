@@ -1,5 +1,6 @@
 package com.watent.soa.bean;
 
+import com.watent.soa.redis.RedisApi;
 import com.watent.soa.registry.BaseRegistryDelegate;
 import lombok.Data;
 import org.springframework.beans.BeansException;
@@ -25,6 +26,10 @@ public class Service extends BaseConfigBean implements Serializable, Initializin
 
     private static ApplicationContext applicationContext;
 
+    public static ApplicationContext getApplicationContext() {
+        return applicationContext;
+    }
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         Service.applicationContext = applicationContext;
@@ -33,10 +38,9 @@ public class Service extends BaseConfigBean implements Serializable, Initializin
     @Override
     public void afterPropertiesSet() throws Exception {
         BaseRegistryDelegate.registry(ref, applicationContext);
-    }
 
-    public static ApplicationContext getApplicationContext() {
-        return applicationContext;
+        //*要与redis 节点里面内容一致
+        RedisApi.publish("channel" + ref, "*");
     }
 
 }

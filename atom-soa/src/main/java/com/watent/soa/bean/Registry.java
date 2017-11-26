@@ -3,6 +3,7 @@ package com.watent.soa.bean;
 import com.watent.soa.registry.BaseRegistry;
 import com.watent.soa.registry.RedisRegistry;
 import lombok.Data;
+import org.springframework.beans.factory.InitializingBean;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -26,7 +27,4 @@ public class Registry implements Serializable {
         registryMap.put("redis", new RedisRegistry());
     }
 
-    public Map<String, BaseRegistry> getRegistryMap() {
-        return registryMap;
-    }
 }

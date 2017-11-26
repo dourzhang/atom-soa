@@ -1,6 +1,6 @@
 package com.watent.soa.cfg;
 
-import com.watent.soa.exception.DubboException;
+import com.watent.soa.exception.SOAException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
@@ -35,13 +35,13 @@ public class ProtocolBeanDefinitionParse implements BeanDefinitionParser {
         String contextpath = element.getAttribute("contextpath");
 
         if (StringUtils.isEmpty(name)) {
-            throw new DubboException("name could't be null");
+            throw new SOAException("name could't be null");
         }
         if (StringUtils.isEmpty(host)) {
-            throw new DubboException("host could't be null");
+            throw new SOAException("host could't be null");
         }
         if (StringUtils.isEmpty(port)) {
-            throw new DubboException("port could't be null");
+            throw new SOAException("port could't be null");
         }
 
         beanDefinition.getPropertyValues().addPropertyValue("name", name);

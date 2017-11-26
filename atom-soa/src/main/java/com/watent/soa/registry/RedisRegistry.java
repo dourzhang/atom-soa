@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.watent.soa.bean.Protocol;
 import com.watent.soa.bean.Registry;
 import com.watent.soa.bean.Service;
-import com.watent.soa.exception.DubboException;
+import com.watent.soa.exception.SOAException;
 import com.watent.soa.redis.RedisApi;
 import org.springframework.context.ApplicationContext;
 
@@ -64,7 +64,7 @@ public class RedisRegistry implements BaseRegistry {
             }
             return true;
         } catch (Exception e) {
-            throw new DubboException(e);
+            throw new SOAException(e);
         }
     }
 
